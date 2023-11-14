@@ -84,6 +84,15 @@ h6 {
   --support-2-800: hsla(345, 100%, 35%, 1);
   --support-2-900: hsla(350, 100%, 25%, 1);
 
+  --elevation-2: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+
   /* TODO change into themes */
   --bg: var(--grey-100);
+  /* --blog-post-bg: linear-gradient(
+    0deg,
+    hsla(60, 100%, 95%, 0.35) 0%,
+    hsla(60, 100%, 95%, 0.5) 100%
+  ); */
+  --blog-post-bg: hsla(60, 100%, 95%, 0.35);
+  --blog-post-bg-hover: hsla(60, 100%, 95%, 0.7);
 }

@@ -1,0 +1,78 @@
+---
+interface Props {
+  url: string | undefined
+  title: string
+  description: string
+  pubDate: string
+  type: 'science' | 'industry' | 'engineering'
+}
+const { title, description, pubDate, url, type } = Astro.props
+---
+
+<a href={url} class={type}>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <time>{pubDate}</time>
+</a>
+
+<style lang='scss'>
+  a {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 0.3125rem;
+    text-decoration: none;
+    background: var(--blog-post-bg);
+    box-shadow: var(--elevation-2);
+    padding: 1rem;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-left: 4px solid var(--border-colour, var(--accent-500));
+    height: 6rem;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      border-left: 4px solid var(--border-colour-hover, var(--accent-400));
+      background: var(--blog-post-bg-hover);
+    }
+
+    &.engineering {
+      --border-colour: var(--support-2-500);
+      --border-colour-hover: var(--support-2-300);
+    }
+
+    &.science {
+      --border-colour: var(--support-1-500);
+      --border-colour-hover: var(--support-1-400);
+    }
+
+    > h3 {
+      font-family: 'Overpass', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--grey-900);
+      line-height: 1;
+    }
+
+    > p {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      font-size: 0.875rem;
+      color: var(--grey-600);
+      hyphens: auto;
+      overflow: hidden;
+    }
+
+    > time {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--grey-700);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+    }
+  }
+</style>

@@ -1,0 +1,90 @@
+---
+import BlogPost from '@components/BlogPost.astro'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { relativeDate, splitPostsByDate, MonthNames } from '@utils/dateUtils'
+const allPosts = await Astro.glob('../pages/posts/*.md')
+const structuredPosts = splitPostsByDate(allPosts)
+---
+
+<BaseLayout>
+  <a href='/' id='back-link'> &lt</a>
+  <h1 id='page-name'>Blog</h1>
+  {
+    Object.keys(structuredPosts)
+      .sort()
+      .map((year) => {
+        const yearlyPosts = structuredPosts[Number(year)]
+        return Object.keys(yearlyPosts)
+          .sort()
+          .map((month) => (
+            <div class='monthly-posts'>
+              <h2>{MonthNames[Number(month)] + ' ' + year}</h2>
+              <ul>
+                {yearlyPosts[Number(month)].map((post) => (
+                  <li>
+                    <BlogPost
+                      url={post.url}
+                      title={post.frontmatter.title}
+                      description={post.frontmatter.description}
+                      type={post.frontmatter.type}
+                      pubDate={relativeDate(post.frontmatter.pubDate)}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+      })
+  }
+</BaseLayout>
+
+<style lang='scss'>
+  #back-link {
+    position: absolute;
+    font-family: 'DM Mono', monospace;
+    font-weight: 400;
+    font-size: 2.25rem;
+    color: var(--grey-400);
+    text-decoration: none;
+    line-height: 0.75;
+    margin: 0;
+    padding: 0;
+    transition: 0.2s ease-in-out;
+    top: 0;
+    left: 1.125rem;
+
+    &:hover {
+      color: var(--grey-500);
+    }
+  }
+
+  #page-name {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 700;
+    font-size: 2.25rem;
+    color: var(--accent-600);
+    line-height: 1;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+    margin-bottom: 0.75rem;
+  }
+
+  li:last-child {
+    margin-bottom: 0;
+  }
+
+  .monthly-posts {
+    > h2 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+  }
+</style>

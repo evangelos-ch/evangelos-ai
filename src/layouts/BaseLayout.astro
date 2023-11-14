@@ -1,23 +1,128 @@
 ---
-import '../styles/global.css'
+import IndexButton from '@components/IndexButton.astro'
+import Skeleton from '@layouts/Skeleton.astro'
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <meta name='viewport' content='width=device-width' />
-    <meta name='generator' content={Astro.generator} />
-    <title>evangelos.ai</title>
-    <!-- Fonts -->
-    <link rel='preconnect' href='https://fonts.googleapis.com' />
-    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
-    <link
-      href='https://fonts.googleapis.com/css2?family=DM+Mono&family=Inter&family=Overpass:wght@700&family=Poppins&display=swap'
-      rel='stylesheet'
-    />
-  </head>
-  <body>
-    <slot />
-  </body>
-</html>
+<Skeleton>
+  <div id='container'>
+    <div id='header-container'>
+      <section id='header'>
+        <img alt='EC' />
+        <div id='name'>
+          <h1>Evangelos Chatzaroulas</h1>
+          <h2>PhD Candidate @ Surrey</h2>
+        </div>
+      </section>
+    </div>
+    <section id='content-container'>
+      <div id='content'>
+        <slot />
+      </div>
+    </section>
+  </div>
+</Skeleton>
+
+<style lang='scss'>
+  #container {
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(188deg, #0c191d 0%, black 60%);
+  }
+
+  #header-container {
+    height: 50vh;
+    position: relative;
+  }
+
+  #header {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-58%, 25%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    z-index: 3;
+
+    > img {
+      display: inline-block;
+      width: 256px;
+      height: 256px;
+      border-radius: 100%;
+      box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.15),
+        0 3px 6px rgba(0, 0, 0, 0.15);
+      background-image: url('/images/pfp.jpeg');
+      background-size: 100%;
+      background-color: var(--grey-700);
+      background-blend-mode: luminosity;
+    }
+
+    #name {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+
+      > h1 {
+        display: inline-block;
+        line-height: 1;
+        font-family: 'Overpass', sans-serif;
+        font-size: 2.25rem;
+        color: var(--grey-100);
+        margin: 0;
+      }
+
+      > h2 {
+        margin: 0;
+        line-height: 1;
+        font-family: 'DM Mono', monospace;
+        display: inline-block;
+        width: max-content;
+        font-weight: 400;
+        font-size: 1.5rem;
+        background-color: var(--primary-500);
+        background-image: var(--primary-gradient);
+        background-size: 100%;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-text-fill-color: transparent;
+      }
+    }
+  }
+
+  #content-container {
+    position: relative;
+    min-height: 50vh;
+    z-index: 2;
+    padding-top: 103px;
+    overflow-y: visible;
+    overflow-x: clip;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: var(--bg);
+      z-index: -1;
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+      transform: scaleX(1.35) rotateX(180deg);
+      box-shadow: 0 0 60px var(--primary-400);
+    }
+  }
+
+  #content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 2rem;
+    width: 768px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+</style>
