@@ -10,6 +10,7 @@
 
 body {
   -webkit-font-smoothing: antialiased;
+  background-color: var(--grey-100);
 }
 
 p,
@@ -87,6 +88,7 @@ h6 {
   --elevation-2: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
 
   /* TODO change into themes */
+  --dark-gradient: linear-gradient(188deg, #0c191d 0%, black 60%);
   --bg: var(--grey-100);
   /* --blog-post-bg: linear-gradient(
     0deg,

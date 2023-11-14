@@ -4,6 +4,7 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 import { relativeDate, splitPostsByDate, MonthNames } from '@utils/dateUtils'
 const allPosts = await Astro.glob('../pages/posts/*.md')
 const structuredPosts = splitPostsByDate(allPosts)
+const collator = new Intl.Collator([], { numeric: true })
 ---
 
 <BaseLayout>
@@ -11,11 +12,13 @@ const structuredPosts = splitPostsByDate(allPosts)
   <h1 id='page-name'>Blog</h1>
   {
     Object.keys(structuredPosts)
-      .sort()
+      .sort((a, b) => collator.compare(a, b))
+      .reverse()
       .map((year) => {
         const yearlyPosts = structuredPosts[Number(year)]
         return Object.keys(yearlyPosts)
-          .sort()
+          .sort((a, b) => collator.compare(a, b))
+          .reverse()
           .map((month) => (
             <div class='monthly-posts'>
               <h2>{MonthNames[Number(month)] + ' ' + year}</h2>
