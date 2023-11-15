@@ -4,8 +4,26 @@ export const relativeDate = (date: string) => {
   const postDate = new Date(date)
   const currentDate = new Date()
   const diff = (currentDate.getTime() - postDate.getTime()) / 1000 // in seconds
+  const minute = 60
+  const hour = 60 * 60
+  const day = 60 * 60 * 24
   const week = 60 * 60 * 24 * 7
   const month = 60 * 60 * 24 * 30
+
+  if (diff < minute) {
+    const secondsAgo = Math.floor(diff)
+    return `${secondsAgo} second${secondsAgo > 1 ? 's' : ''} ago`
+  }
+
+  if (diff < hour) {
+    const minutesAgo = Math.floor(diff / minute)
+    return `${minutesAgo} minute${minutesAgo > 1 ? 's' : ''} ago`
+  }
+
+  if (diff < day) {
+    const hoursAgo = Math.floor(diff / hour)
+    return `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`
+  }
 
   if (diff < week) {
     return `${Math.floor(diff / (week / 7))} days ago`
