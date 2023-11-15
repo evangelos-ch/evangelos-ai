@@ -42,25 +42,25 @@ const blogActive = currentPath === 'blog' || postActive
 </nav>
 
 <script>
-  addEventListener('scroll', (event) => {
+  addEventListener('scroll', () => {
     const { scrollTop, scrollHeight } = document.documentElement
     const scrollPercent =
       (scrollTop / (scrollHeight - window.innerHeight)) * 100
     const docReadPercent = (scrollPercent - 30) * (100 / 70)
 
     if (scrollPercent > 30) {
-      document.querySelector('nav').style.transform = 'translate(0, 0)'
-      document.getElementById('header').classList.add('scrolled')
-      document.getElementById('content-container').classList.add('no-bg')
-      document.getElementById('content').classList.add('scrolled')
-      document.getElementById('progress-bar').style.clipPath = `inset(0 ${
+      document.querySelector('nav')!.style.transform = 'translate(0, 0)'
+      document.getElementById('header')!.classList.add('scrolled')
+      document.getElementById('content-container')!.classList.add('no-bg')
+      document.getElementById('content')!.classList.add('scrolled')
+      document.getElementById('progress-bar')!.style.clipPath = `inset(0 ${
         100 - docReadPercent
       }% 0 0)`
     } else {
-      document.querySelector('nav').style.transform = 'translate(0, -150%)'
-      document.getElementById('header').classList.remove('scrolled')
-      document.getElementById('content-container').classList.remove('no-bg')
-      document.getElementById('content').classList.remove('scrolled')
+      document.querySelector('nav')!.style.transform = 'translate(0, -150%)'
+      document.getElementById('header')!.classList.remove('scrolled')
+      document.getElementById('content-container')!.classList.remove('no-bg')
+      document.getElementById('content')!.classList.remove('scrolled')
     }
   })
 </script>
