@@ -47,6 +47,11 @@ import Navbar from '@components/Navbar.astro'
     gap: 1.5rem;
     z-index: 3;
     transition: 0.35s ease-in-out;
+    opacity: 1;
+
+    &.scrolled {
+      opacity: 0;
+    }
 
     > img {
       display: inline-block;
@@ -128,7 +133,9 @@ import Navbar from '@components/Navbar.astro'
       transform: scaleX(1.35) rotateX(180deg);
       box-shadow: 0 0 60px var(--primary-400);
       clip-path: inset(0 0 -50vh 0);
-      transition: 0.35s ease-in-out;
+      transition:
+        0.35s ease-in-out,
+        background-color 0.2s ease-in-out;
     }
   }
 

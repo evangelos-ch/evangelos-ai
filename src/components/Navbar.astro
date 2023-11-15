@@ -1,17 +1,30 @@
 ---
+import ThemeToggle from '@components/ThemeToggle.astro'
+
 const pathname = new URL(Astro.request.url).pathname
 const currentPath = pathname.slice(1) // remove the first "/"
+
+const postActive = currentPath.includes('posts')
+const blogActive = currentPath === 'blog' || postActive
 ---
 
 <nav>
+  {
+    postActive && (
+      <div id='progress-bar'>
+        <div id='progress-bar__inner' />
+      </div>
+    )
+  }
   <a id='home-link' href='/'
     >evangelos<span id='home-link__dot'>.</span><span id='home-link__ai'
       >ai</span
     ></a
   >
   <ul>
+    <ThemeToggle />
     <li>
-      <a href='/blog' class={currentPath === 'blog' ? 'active' : ''}>Blog</a>
+      <a href='/blog' class={blogActive ? 'active' : ''}>Blog</a>
     </li>
     <li>
       <a
@@ -30,20 +43,24 @@ const currentPath = pathname.slice(1) // remove the first "/"
 
 <script>
   addEventListener('scroll', (event) => {
-    const scrollTop = window.scrollY
-    const docHeight = document.body.scrollHeight
-    const winHeight = window.innerHeight
-    const scrollPercent = scrollTop / (docHeight - winHeight)
-    if (scrollPercent * 100 > 50) {
+    const { scrollTop, scrollHeight } = document.documentElement
+    const scrollPercent =
+      (scrollTop / (scrollHeight - window.innerHeight)) * 100
+    const docReadPercent = (scrollPercent - 30) * (100 / 70)
+
+    if (scrollPercent > 30) {
       document.querySelector('nav').style.transform = 'translate(0, 0)'
-      document.getElementById('header').style.opacity = '0'
+      document.getElementById('header').classList.add('scrolled')
       document.getElementById('content-container').classList.add('no-bg')
-      document.getElementById('container').classList.add('scroll-bg')
+      document.getElementById('content').classList.add('scrolled')
+      document.getElementById('progress-bar').style.clipPath = `inset(0 ${
+        100 - docReadPercent
+      }% 0 0)`
     } else {
       document.querySelector('nav').style.transform = 'translate(0, -150%)'
-      document.getElementById('header').style.opacity = '1'
+      document.getElementById('header').classList.remove('scrolled')
       document.getElementById('content-container').classList.remove('no-bg')
-      document.getElementById('container').classList.remove('scroll-bg')
+      document.getElementById('content').classList.remove('scrolled')
     }
   })
 </script>
@@ -68,6 +85,8 @@ const currentPath = pathname.slice(1) // remove the first "/"
       z-index: 999;
     }
 
+    #progress-bar,
+    &:after,
     &:before {
       content: '';
       position: absolute;
@@ -76,11 +95,26 @@ const currentPath = pathname.slice(1) // remove the first "/"
       height: 100%;
       max-height: 6rem;
       width: 100%;
-      background: linear-gradient(180deg, #0c191d 0%, black 100%);
-      z-index: 998;
       border-bottom-left-radius: 50%;
       border-bottom-right-radius: 50%;
       transform: scaleX(1.2);
+    }
+
+    #progress-bar {
+      top: 8px;
+      z-index: 997;
+      transition: clip-path 0.3s ease-out;
+      clip-path: inset(0 0 0 0);
+      background: var(--accent-500);
+    }
+
+    &:after {
+      background: linear-gradient(180deg, #0c191d 0%, black 100%);
+      z-index: 998;
+    }
+
+    &:before {
+      z-index: 996;
       box-shadow: 0 0 60px var(--primary-400);
     }
   }

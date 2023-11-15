@@ -1,6 +1,7 @@
 ---
 import BlogPost from '@components/BlogPost.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
+import BackButton from '@components/BackButton.astro'
 import { relativeDate, splitPostsByDate, MonthNames } from '@utils/dateUtils'
 const allPosts = await Astro.glob('../pages/posts/*.md')
 const structuredPosts = splitPostsByDate(allPosts)
@@ -8,7 +9,7 @@ const collator = new Intl.Collator([], { numeric: true })
 ---
 
 <BaseLayout>
-  <a href='/' id='back-link'> &lt</a>
+  <BackButton to='/' />
   <h1 id='page-name'>Blog</h1>
   {
     Object.keys(structuredPosts)
@@ -42,25 +43,6 @@ const collator = new Intl.Collator([], { numeric: true })
 </BaseLayout>
 
 <style lang='scss'>
-  #back-link {
-    position: absolute;
-    font-family: 'DM Mono', monospace;
-    font-weight: 400;
-    font-size: 2.25rem;
-    color: var(--grey-400);
-    text-decoration: none;
-    line-height: 0.75;
-    margin: 0;
-    padding: 0;
-    transition: 0.2s ease-in-out;
-    top: 0;
-    left: 1.125rem;
-
-    &:hover {
-      color: var(--grey-500);
-    }
-  }
-
   #page-name {
     font-family: 'Overpass', sans-serif;
     font-weight: 700;
@@ -89,5 +71,9 @@ const collator = new Intl.Collator([], { numeric: true })
       font-size: 1.5rem;
       margin-bottom: 0.75rem;
     }
+  }
+
+  :global(.dark) .monthly-posts > h2 {
+    color: var(--grey-100);
   }
 </style>

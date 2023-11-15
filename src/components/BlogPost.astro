@@ -75,4 +75,21 @@ const { title, description, pubDate, url, type } = Astro.props
       letter-spacing: 0.25em;
     }
   }
+
+  :global(.dark) a {
+    --blog-post-bg: rgba(92, 128, 138, 0.35);
+    --blog-post-bg-hover: rgba(92, 128, 138, 0.5);
+
+    > h3 {
+      color: var(--grey-100);
+    }
+
+    > p {
+      color: var(--grey-300);
+    }
+
+    time {
+      color: var(--grey-100);
+    }
+  }
 </style>
