@@ -40,7 +40,11 @@ const shortDate = frontmatter.pubDate.slice(0, 10)
 <script>
   import { relativeDate } from '@utils/dateUtils'
   const postDate = document.getElementById('header__post-date')
-  postDate!.innerText = relativeDate(postDate!.getAttribute('data-pubDate')!)
+  // For some reason this gets hoisted into the script containing relativeDate lmao?
+  // So need to make sure this code will run on any page that might use relativeDate.
+  if (postDate) {
+    postDate.innerText = relativeDate(postDate.getAttribute('data-pubDate')!)
+  }
 </script>
 
 <style lang='scss'>
