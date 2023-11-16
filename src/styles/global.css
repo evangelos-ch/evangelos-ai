@@ -114,14 +114,46 @@ html.dark {
 }
 
 /* Blog element styling */
-#post-content p {
+#post-content p,
+#post-content ul,
+#post-content ol {
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   margin-top: 1rem;
 }
 
+#post-content p strong {
+  font-weight: 600;
+}
+
 #post-content p:first-child {
   margin-top: 0;
+}
+
+#post-content ul li::marker {
+  color: var(--accent-600);
+}
+
+/* Custom ul styling leftovers
+#post-content ul li {
+  margin-left: calc(1.5rem + 1em);
+  position: relative;
+}
+
+#post-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+#post-content ul li:before {
+  content: '•';
+  position: absolute;
+  color: var(--accent-600);
+  left: -1em;
+} */
+
+#post-content ol li::marker {
+  color: var(--accent-600);
 }
 
 #post-content h1,
