@@ -1,10 +1,18 @@
 ---
+import type { CollectionEntry } from 'astro:content'
+
 import BackButton from '@components/BackButton.astro'
 import Skeleton from '@layouts/Skeleton.astro'
 import Navbar from '@components/Navbar.astro'
 
-const { frontmatter } = Astro.props
-const shortDate = frontmatter.pubDate.slice(0, 10)
+interface Props {
+  post: CollectionEntry<'blog'>
+}
+
+const { post } = Astro.props
+const dateString = post.data.pubDate.toISOString()
+const shortDate = dateString.slice(0, 10)
+const { Content } = await post.render()
 ---
 
 <Skeleton>
@@ -12,15 +20,11 @@ const shortDate = frontmatter.pubDate.slice(0, 10)
   <div id='container'>
     <div id='header-container'>
       <section id='header'>
-        <div
-          id='header__post-name'
-          class:list={['post-name', frontmatter.type]}
-        >
-          <h1>{frontmatter.title}</h1>
+        <div id='header__post-name' class:list={['post-name', post.data.type]}>
+          <h1>{post.data.title}</h1>
           <div class='subtitle'>
             <hr />
-            <time id='header__post-date' data-pubDate={frontmatter.pubDate}
-              >{shortDate}</time
+            <time id='header__post-date' datetime={dateString}>{shortDate}</time
             >
           </div>
         </div>
@@ -30,7 +34,7 @@ const shortDate = frontmatter.pubDate.slice(0, 10)
       <div id='content'>
         <BackButton to='/blog' />
         <div id='post-content'>
-          <slot />
+          <Content />
         </div>
       </div>
     </section>
@@ -43,7 +47,7 @@ const shortDate = frontmatter.pubDate.slice(0, 10)
   // For some reason this gets hoisted into the script containing relativeDate lmao?
   // So need to make sure this code will run on any page that might use relativeDate.
   if (postDate) {
-    postDate.innerText = relativeDate(postDate.getAttribute('data-pubDate')!)
+    postDate.innerText = relativeDate(postDate.getAttribute('datetime')!)
   }
 </script>
 

@@ -1,19 +1,23 @@
 ---
+import type { CollectionEntry } from 'astro:content'
+import { getPostSlug } from '@utils/dateUtils'
+
 interface Props {
-  url: string | undefined
-  title: string
-  description: string
-  pubDate: string
-  type: 'science' | 'industry' | 'engineering'
+  post: CollectionEntry<'blog'>
+  urlPrefix?: string
 }
-const { title, description, pubDate, url, type } = Astro.props
-const shortDate = pubDate.slice(0, 10)
+const { urlPrefix = '/blog', post } = Astro.props
+const dateString = post.data.pubDate.toISOString()
+const shortDate = dateString.slice(0, 10)
 ---
 
-<a href={url} class:list={[type, 'blog-post-item']}>
-  <h3>{title}</h3>
-  <p>{description}</p>
-  <time data-pubDate={pubDate}>{shortDate}</time>
+<a
+  href={`${urlPrefix}/${getPostSlug(post)}`}
+  class:list={[post.data.type, 'blog-post-item']}
+>
+  <h3>{post.data.title}</h3>
+  <p>{post.data.description}</p>
+  <time datetime={dateString}>{shortDate}</time>
 </a>
 
 <script>
@@ -21,9 +25,7 @@ const shortDate = pubDate.slice(0, 10)
   const posts = document.querySelectorAll('.blog-post-item')
   posts.forEach((post) => {
     const postDate = post.querySelector('time')
-    postDate!.textContent = relativeDate(
-      postDate!.getAttribute('data-pubDate')!
-    )
+    postDate!.textContent = relativeDate(postDate!.getAttribute('datetime')!)
   })
 </script>
 

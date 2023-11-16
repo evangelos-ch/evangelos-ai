@@ -1,4 +1,4 @@
-import type { MarkdownInstance } from 'astro'
+import type { CollectionEntry } from 'astro:content'
 
 export const relativeDate = (date: string) => {
   const postDate = new Date(date)
@@ -38,10 +38,9 @@ export const relativeDate = (date: string) => {
   return postDate.toLocaleDateString('en-GB')
 }
 
-export type Post = MarkdownInstance<Record<string, any>>
-export interface PostMap {
+export interface BlogEntryMap {
   [year: number]: {
-    [month: number]: Post[]
+    [month: number]: CollectionEntry<'blog'>[]
   }
 }
 export const MonthNames = [
@@ -59,11 +58,20 @@ export const MonthNames = [
   'December'
 ]
 
-export const splitPostsByDate = (posts: Post[]) => {
-  let ret: PostMap = {}
+export const getPostSlug = (post: CollectionEntry<'blog'>) => {
+  const date = post.data.pubDate
+  const slug = (post.slug.match(/\d{4}-\d{2}-\d{2}-(.+)/) || [])[1] || post.slug
+  const year = date.getFullYear()
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+
+  return `${year}/${month}/${slug}`
+}
+
+export const splitPostsByDate = (posts: CollectionEntry<'blog'>[]) => {
+  let ret: BlogEntryMap = {}
 
   posts.forEach((post) => {
-    const date = new Date(post.frontmatter.pubDate)
+    const date = post.data.pubDate
     const year = date.getFullYear()
     const month = date.getMonth()
 

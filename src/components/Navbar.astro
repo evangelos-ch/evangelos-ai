@@ -4,7 +4,7 @@ import ThemeToggle from '@components/ThemeToggle.astro'
 const pathname = new URL(Astro.request.url).pathname
 const currentPath = pathname.slice(1) // remove the first "/"
 
-const postActive = currentPath.includes('posts')
+const postActive = currentPath.match(/blog\/\d{4}\/\d{2}\/.+/)
 const blogActive = currentPath === 'blog' || postActive
 ---
 

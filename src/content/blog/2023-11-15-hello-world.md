@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/PostLayout.astro
 title: Hello, World!
 author: Angel
 description: Honestly, this post is cause I don't want an empty directory until I actually have something to post (it's not really coded yet). So, here's a little bit about me and this site. This post can act a bit like an About page, I guess.
@@ -8,7 +7,7 @@ type: engineering
 tags: []
 ---
 
-Honestly, this post is cause I don't want an empty directory until I actually have something to post (it's not really coded yet). So, here's a little bit about me and this site. This post can act a bit like an About page, I guess.
+Honestly, this post is cause I don't want an empty directory until I _actually_ have something to post (it's not really coded yet). So, here's a little bit about me and this site. This post can act a bit like an About page, I guess.
 
 # new blog, who this
 
