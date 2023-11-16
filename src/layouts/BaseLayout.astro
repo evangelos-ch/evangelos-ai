@@ -136,6 +136,12 @@ import Navbar from '@components/Navbar.astro'
         0.35s ease-in-out,
         background-color 0.2s ease-in-out;
     }
+
+    @media (max-width: 1200px) {
+      &:before {
+        --bg-scale: scaleX(2);
+      }
+    }
   }
 
   #content {

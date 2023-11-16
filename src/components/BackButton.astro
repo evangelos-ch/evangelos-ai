@@ -1,4 +1,12 @@
-<a href='/'> &lt</a>
+---
+interface Props {
+  to: string
+}
+
+const { to = '/' } = Astro.props
+---
+
+<a href={to}> &lt</a>
 
 <style lang='scss'>
   a {

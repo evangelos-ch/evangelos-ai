@@ -97,6 +97,11 @@ h6 {
   ); */
   --blog-post-bg: hsla(60, 100%, 95%, 0.35);
   --blog-post-bg-hover: hsla(60, 100%, 95%, 0.7);
+
+  --content-width: 768px;
+  --content-padding-top: 96px;
+  --content-padding-top-expanded: 250px;
+  --content-padding-side: 3rem;
 }
 
 /* Dark mode */
