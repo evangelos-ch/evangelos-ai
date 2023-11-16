@@ -1,17 +1,26 @@
 ---
+import type { IconType } from '@utils/icons'
 import type { HTMLAttributes } from 'astro/types'
+import Icon from '@components/Icon.astro'
 interface Props extends HTMLAttributes<'a'> {
   bg?: 'light' | 'medium' | 'dark'
+  icon?: IconType
 }
-const { href, bg = 'medium', ...attrs } = Astro.props
+const { href, icon, bg = 'medium', ...attrs } = Astro.props
 ---
 
-<a href={href} class={bg} {...attrs}><slot /></a>
+<a href={href} class:list={['index-btn', bg]} {...attrs}>
+  {icon && <Icon type={icon} height='1.5rem' fill='var(--grey-300)' />}
+  <span class='index-btn__text'><slot /></span>
+</a>
 
 <style lang='scss'>
-  a {
-    display: block;
-    text-align: center;
+  .index-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
     text-decoration: none;
     color: var(--grey-100);
     width: 24rem;

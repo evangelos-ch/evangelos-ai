@@ -1,5 +1,6 @@
 ---
 import ThemeToggle from '@components/ThemeToggle.astro'
+import Icon from '@components/Icon.astro'
 
 const pathname = new URL(Astro.request.url).pathname
 const currentPath = pathname.slice(1) // remove the first "/"
@@ -29,13 +30,16 @@ const blogActive = currentPath === 'blog' || postActive
     <li>
       <a
         href='https://scholar.google.com/citations?user=H0FOMNcAAAAJ&hl=en'
-        class={currentPath === 'papers' ? 'active' : ''}>Papers</a
+        class={currentPath === 'papers' ? 'active' : ''}
+        ><Icon type='gscholar' height='1.5rem' />Papers</a
       >
     </li>
     <li>
       <a
         href='https://gtihub.com/evangelos-ch'
-        class={currentPath === 'code' ? 'active' : ''}>Code</a
+        class={currentPath === 'code' ? 'active' : ''}
+      >
+        <Icon type='github' height='1.5rem' />Code</a
       >
     </li>
   </ul>
@@ -156,15 +160,17 @@ const blogActive = currentPath === 'blog' || postActive
     color: var(--grey-100);
 
     > a {
+      display: flex;
+      flex-direction: row;
+      gap: 0.75rem;
       padding: 0.25rem 1rem;
+      transition: filter 0.2s ease-out;
 
       &.active {
         background-image: var(--primary-gradient);
-        transition: filter 0.2s ease-out;
 
         &:hover {
           filter: brightness(1.1);
-          text-shadow: none;
         }
       }
     }
@@ -173,10 +179,9 @@ const blogActive = currentPath === 'blog' || postActive
   a {
     text-decoration: none;
     color: inherit;
-    transition: text-shadow 0.2s ease-out;
 
     &:hover {
-      text-shadow: 0 0 10px var(--accent-100);
+      filter: drop-shadow(0 0 5px var(--accent-100));
     }
   }
 </style>
