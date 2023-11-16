@@ -7,13 +7,25 @@ interface Props {
   type: 'science' | 'industry' | 'engineering'
 }
 const { title, description, pubDate, url, type } = Astro.props
+const shortDate = pubDate.slice(0, 10)
 ---
 
-<a href={url} class={type}>
+<a href={url} class:list={[type, 'blog-post-item']}>
   <h3>{title}</h3>
   <p>{description}</p>
-  <time>{pubDate}</time>
+  <time data-pubDate={pubDate}>{shortDate}</time>
 </a>
+
+<script>
+  import { relativeDate } from '@utils/dateUtils'
+  const posts = document.querySelectorAll('.blog-post-item')
+  posts.forEach((post) => {
+    const postDate = post.querySelector('time')
+    postDate!.textContent = relativeDate(
+      postDate!.getAttribute('data-pubDate')!
+    )
+  })
+</script>
 
 <style lang='scss'>
   a {

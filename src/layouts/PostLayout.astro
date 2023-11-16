@@ -2,9 +2,9 @@
 import BackButton from '@components/BackButton.astro'
 import Skeleton from '@layouts/Skeleton.astro'
 import Navbar from '@components/Navbar.astro'
-import { relativeDate } from '@utils/dateUtils'
 
 const { frontmatter } = Astro.props
+const shortDate = frontmatter.pubDate.slice(0, 10)
 ---
 
 <Skeleton>
@@ -19,7 +19,9 @@ const { frontmatter } = Astro.props
           <h1>{frontmatter.title}</h1>
           <div class='subtitle'>
             <hr />
-            <time>{relativeDate(frontmatter.pubDate)}</time>
+            <time id='header__post-date' data-pubDate={frontmatter.pubDate}
+              >{shortDate}</time
+            >
           </div>
         </div>
       </section>
@@ -34,6 +36,12 @@ const { frontmatter } = Astro.props
     </section>
   </div>
 </Skeleton>
+
+<script>
+  import { relativeDate } from '@utils/dateUtils'
+  const postDate = document.getElementById('header__post-date')
+  postDate!.innerText = relativeDate(postDate!.getAttribute('data-pubDate')!)
+</script>
 
 <style lang='scss'>
   #container {

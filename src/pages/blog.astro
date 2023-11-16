@@ -2,7 +2,7 @@
 import BlogPost from '@components/BlogPost.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import BackButton from '@components/BackButton.astro'
-import { relativeDate, splitPostsByDate, MonthNames } from '@utils/dateUtils'
+import { splitPostsByDate, MonthNames } from '@utils/dateUtils'
 const allPosts = await Astro.glob('../pages/posts/*.md')
 const structuredPosts = splitPostsByDate(allPosts)
 const collator = new Intl.Collator([], { numeric: true })
@@ -31,7 +31,7 @@ const collator = new Intl.Collator([], { numeric: true })
                       title={post.frontmatter.title}
                       description={post.frontmatter.description}
                       type={post.frontmatter.type}
-                      pubDate={relativeDate(post.frontmatter.pubDate)}
+                      pubDate={post.frontmatter.pubDate}
                     />
                   </li>
                 ))}

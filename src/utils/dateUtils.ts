@@ -26,7 +26,8 @@ export const relativeDate = (date: string) => {
   }
 
   if (diff < week) {
-    return `${Math.floor(diff / (week / 7))} days ago`
+    const daysAgo = Math.floor(diff / day)
+    return `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`
   }
 
   if (diff < month) {
