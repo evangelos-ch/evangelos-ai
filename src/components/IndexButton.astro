@@ -9,7 +9,7 @@ interface Props extends HTMLAttributes<'a'> {
 const { href, icon, bg = 'medium', ...attrs } = Astro.props
 ---
 
-<a href={href} class:list={['index-btn', bg]} {...attrs}>
+<a href={href} class:list={['index-btn', bg]} {...attrs} rel='prefetch'>
   {icon && <Icon type={icon} height='1.5rem' fill='var(--grey-300)' />}
   <span class='index-btn__text'><slot /></span>
 </a>

@@ -57,9 +57,10 @@ const blogActive = currentPath === 'blog' || postActive
       document.getElementById('header')!.classList.add('scrolled')
       document.getElementById('content-container')!.classList.add('no-bg')
       document.getElementById('content')!.classList.add('scrolled')
-      document.getElementById('progress-bar')!.style.clipPath = `inset(0 ${
-        100 - docReadPercent
-      }% 0 0)`
+      const progressBar = document.getElementById('progress-bar')
+      if (progressBar) {
+        progressBar.style.clipPath = `inset(0 ${100 - docReadPercent}% 0 0)`
+      }
     } else {
       document.querySelector('nav')!.style.transform = 'translate(0, -150%)'
       document.getElementById('header')!.classList.remove('scrolled')

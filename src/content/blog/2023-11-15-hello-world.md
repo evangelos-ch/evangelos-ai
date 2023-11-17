@@ -1,6 +1,6 @@
 ---
 title: Hello, World!
-author: Angel
+author: Evangelos Chatzaroulas
 description: Honestly, this post is cause I don't want an empty directory until I actually have something to post (it's not really coded yet). So, here's a little bit about me and this site. This post can act a bit like an About page, I guess.
 pubDate: 2023-11-15
 type: engineering

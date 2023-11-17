@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content'
 import BackButton from '@components/BackButton.astro'
 import Skeleton from '@layouts/Skeleton.astro'
 import Navbar from '@components/Navbar.astro'
+import BlogPostSeo from '@components/BlogPostSeo.astro'
 
 interface Props {
   post: CollectionEntry<'blog'>
@@ -15,7 +16,8 @@ const shortDate = dateString.slice(0, 10)
 const { Content } = await post.render()
 ---
 
-<Skeleton>
+<Skeleton title={post.data.title}>
+  <BlogPostSeo {post} slot='seo' />
   <Navbar />
   <div id='container'>
     <div id='header-container'>
