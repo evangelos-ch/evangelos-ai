@@ -7,7 +7,7 @@ export default defineConfig({
   site: 'https://evangelos.ai',
   integrations: [sitemap(), prefetch()],
   markdown: {
-    remarkPlugins: ['remark-math'],
+    remarkPlugins: ['remark-math', 'remark-unwrap-images'],
     rehypePlugins: [
       [
         'rehype-katex',

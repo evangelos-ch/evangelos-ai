@@ -42,44 +42,45 @@ const { title } = Astro.props
     <meta name='twitter:domain' content={import.meta.env.SITE} />
     <meta name='twitter:creator' content='@evangelos_ch' />
     <meta name='twitter:site' content='@evangelos_ch' />
-    <!-- TODO per-page image embeds -->
-    <meta
-      property='og:image'
-      content={new URL('/images/default-embed.jpg', Astro.site)}
-    />
-    <meta
-      property='og:image:url'
-      content={new URL('/images/default-embed.jpg', Astro.site)}
-    />
-    <meta
-      property='og:image:secure_url'
-      content={new URL('/images/default-embed.jpg', Astro.site)}
-    />
-    <meta name='twitter:card' content='summary_large_image' />
-    <meta
-      name='twitter:image'
-      content={new URL('/images/default-embed.jpg', Astro.site)}
-    />
-    <meta name='twitter:image:alt' content={title || 'evangelos.ai'} />
-    <meta property='og:image:type' content='image/jpeg' />
-    <meta property='og:image:width' content='1200' />
-    <meta property='og:image:height' content='600' />
     <!-- Custom per-page SEO -->
     <slot name='seo'>
       <meta
         name='description'
         content='Evangelos Chatzaroulas | PhD @ University of Surrey'
       />
+      <!-- OpenGraph -->
       <meta property='og:title' content={title || 'evangelos.ai'} />
       <meta
         property='og:description'
         content='Evangelos Chatzaroulas | PhD @ University of Surrey'
       />
+      <meta
+        property='og:image'
+        content={new URL('/images/default-embed.jpg', Astro.site)}
+      />
+      <meta
+        property='og:image:url'
+        content={new URL('/images/default-embed.jpg', Astro.site)}
+      />
+      <meta
+        property='og:image:secure_url'
+        content={new URL('/images/default-embed.jpg', Astro.site)}
+      />
+      <meta property='og:image:type' content='image/jpeg' />
+      <meta property='og:image:width' content='1200' />
+      <meta property='og:image:height' content='600' />
+      <!-- Twitter -->
       <meta name='twitter:title' content={title || 'evangelos.ai'} />
       <meta
         name='twitter:description'
         content='Evangelos Chatzaroulas | PhD @ University of Surrey'
       />
+      <meta name='twitter:card' content='summary' />
+      <meta
+        name='twitter:image'
+        content={new URL('/images/default-embed-twitter.jpg', Astro.site)}
+      />
+      <meta name='twitter:image:alt' content={title || 'evangelos.ai'} />
       <Fragment set:html={generateJsonLD()} />
     </slot>
   </head>

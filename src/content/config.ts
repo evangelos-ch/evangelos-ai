@@ -12,6 +12,10 @@ const blogCollection = defineCollection({
       z.literal('industry'),
       z.literal('engineering')
     ]),
+    imageUrl: z
+      .string()
+      .regex(/\/images\/(posts\/)?[A-Za-z0-9-_]+(\.jpeg|\.jpg|\.png)/)
+      .optional(),
     tags: z.array(z.string())
   })
 })

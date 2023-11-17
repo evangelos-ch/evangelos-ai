@@ -207,6 +207,10 @@ html.dark {
   transition: 0.2s ease-in-out;
 }
 
+#post-content img {
+  margin-top: 1rem;
+}
+
 #post-content p > a:hover {
   color: var(--accent-600);
 }
@@ -229,7 +233,17 @@ html.dark {
   border-radius: 1rem;
 }
 
-#post-content img + small {
+#post-content p > small.img-caption {
   display: block;
   text-align: center;
+  margin: -0.5rem;
+}
+
+#post-content > * {
+  grid-column: content;
+}
+
+#post-content > img,
+#post-content > .astro-code {
+  grid-column: full-width;
 }

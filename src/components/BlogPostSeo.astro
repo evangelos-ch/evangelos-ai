@@ -7,6 +7,10 @@ interface Props {
 }
 const { post } = Astro.props
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const ogEmbedURL = new URL(
+  post.data.imageUrl || '/images/default-embed.jpg',
+  Astro.site
+)
 ---
 
 <meta name='description' content={post.data.description} />
@@ -14,6 +18,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 <meta property='og:title' content={post.data.title} />
 <meta property='og:type' content='article' />
 <meta property='og:description' content={post.data.description} />
+
+<meta property='og:image' content={ogEmbedURL} />
+<meta property='og:image:url' content={ogEmbedURL} />
+<meta property='og:image:secure_url' content={ogEmbedURL} />
 
 <!-- OpenGraph Article -->
 <meta
@@ -25,6 +33,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
 <!-- Twitter -->
 <meta name='twitter:description' content={post.data.description} />
+<meta
+  name='twitter:card'
+  content={post.data.imageUrl ? 'summary_large_image' : 'summary'}
+/>
+<meta
+  name='twitter:image'
+  content={new URL(
+    post.data.imageUrl || '/images/default-embed-twitter.jpg',
+    Astro.site
+  )}
+/>
+<meta name='twitter:image:alt' content={post.data.description} />
 
 <!-- JSON LD -->
 <Fragment set:html={generateJsonLD(post, canonicalURL.toString())} />

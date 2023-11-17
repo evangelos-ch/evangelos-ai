@@ -17,6 +17,7 @@
     "astro": "^3.5.3",
     "rehype-katex": "^7.0.0",
     "remark-math": "^5.1.1",
+    "remark-unwrap-images": "^4.0.0",
     "sass": "^1.69.5",
     "typescript": "^5.2.2"
   },
