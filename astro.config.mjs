@@ -15,6 +15,10 @@ export default defineConfig({
           // Katex plugin options
         }
       ]
-    ]
+    ],
+    shikiConfig: {
+      // wrap: true,
+      theme: 'css-variables'
+    }
   }
 })

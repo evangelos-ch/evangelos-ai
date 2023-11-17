@@ -102,11 +102,25 @@ h6 {
   --content-padding-top: 96px;
   --content-padding-top-expanded: 250px;
   --content-padding-side: 3rem;
+
+  /* Syntax Highlighting */
+  --astro-code-color-text: var(--grey-100);
+  --astro-code-color-background: var(--grey-900);
+  --astro-code-token-constant: var(--accent-600);
+  --astro-code-token-string: var(--support-1-600);
+  --astro-code-token-comment: var(--grey-800);
+  --astro-code-token-keyword: var(--primary-500);
+  --astro-code-token-parameter: var(--grey-100);
+  --astro-code-token-function: var(--accent-600);
+  --astro-code-token-string-expression: var(--support-1-500);
+  --astro-code-token-punctuation: var(--primary-100);
 }
 
 /* Dark mode */
 html.dark {
   --bg: var(--grey-dark-bg);
+  --elevation-2: 0 3px 6px rgba(255, 255, 255, 0.15),
+    0 2px 4px rgba(255, 255, 255, 0.12);
 }
 
 .dark body {
@@ -195,4 +209,27 @@ html.dark {
 
 #post-content p > a:hover {
   color: var(--accent-600);
+}
+
+#post-content .astro-code {
+  border-radius: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  box-shadow: var(--elevation-2);
+}
+
+#post-content .astro-code > code {
+  font-family: 'DM Mono', monospace;
+  font-size: 1rem;
+}
+
+#post-content img {
+  max-width: 100%;
+  box-shadow: var(--elevation-2);
+  border-radius: 1rem;
+}
+
+#post-content img + small {
+  display: block;
+  text-align: center;
 }
