@@ -38,15 +38,20 @@ const { Content } = await post.render()
             <time id='header__post-date' datetime={dateString}>{shortDate}</time
             >
           </div>
+          {
+            post.data.tags && (
+              <small id='header__post-tags'>{post.data.tags.join(' / ')}</small>
+            )
+          }
         </div>
       </section>
     </div>
     <section id='content-container'>
       <div id='content'>
         <BackButton to='/blog' />
-        <div id='post-content'>
+        <article id='post-content'>
           <Content />
-        </div>
+        </article>
       </div>
     </section>
   </div>
@@ -107,7 +112,7 @@ const { Content } = await post.render()
           z-index: 2;
           width: 100%;
           height: 100%;
-          background-color: hsla(192, 38%, 5%, 0.35);
+          background-color: hsla(192, 38%, 5%, 0.45);
         }
       }
 
@@ -133,6 +138,10 @@ const { Content } = await post.render()
         time {
           color: var(--grey-600);
         }
+        small {
+          color: var(--grey-500);
+          text-shadow: none;
+        }
       }
     }
   }
@@ -148,6 +157,10 @@ const { Content } = await post.render()
 
     time {
       color: var(--primary-300);
+    }
+
+    small {
+      color: var(--primary-200);
     }
   }
 
@@ -182,6 +195,18 @@ const { Content } = await post.render()
       flex-direction: row;
       align-items: center;
       gap: 0.5rem;
+    }
+
+    small {
+      line-height: 1;
+      font-family: 'DM Mono', monospace;
+      margin-top: 5px;
+      font-weight: 400;
+      font-size: 0.875rem;
+      color: var(--primary-200);
+      text-transform: lowercase;
+      white-space: nowrap;
+      text-shadow: 0 0 10px hsla(0, 0%, 0%, 0.5);
     }
 
     hr {
