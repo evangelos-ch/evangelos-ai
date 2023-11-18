@@ -1,0 +1,47 @@
+---
+import Icon from './Icon.astro'
+interface Props {
+  type: 'x' | 'linkedin'
+}
+const { type } = Astro.props
+
+let href = '#'
+switch (type) {
+  case 'x':
+    href = 'https://x.com/evangelos_ch'
+    break
+  case 'linkedin':
+    href = 'https://www.linkedin.com/in/evangelos-chatzaroulas-83425b161/'
+    break
+}
+---
+
+<a {href} class={type}><Icon {type} height='100%' fill='var(--grey-100)' /></a>
+
+<style lang='scss'>
+  a {
+    display: inline-block;
+    text-decoration: none;
+    height: 4rem;
+    width: 4rem;
+    padding: 1rem;
+    border-radius: 100%;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &.x {
+      background-color: var(--grey-dark-bg);
+    }
+
+    &.linkedin {
+      background-image: var(--primary-gradient);
+    }
+  }
+
+  :global(.dark) a.x {
+    background-color: black;
+  }
+</style>

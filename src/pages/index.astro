@@ -1,5 +1,6 @@
 ---
 import IndexButton from '@components/IndexButton.astro'
+import SocialButton from '@components/SocialButton.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 ---
 
@@ -28,6 +29,10 @@ import BaseLayout from '@layouts/BaseLayout.astro'
         Code
       </IndexButton>
     </li>
+  </ul>
+  <ul id='social-buttons'>
+    <li><SocialButton type='x' /></li>
+    <li><SocialButton type='linkedin' /></li>
   </ul>
 </BaseLayout>
 
@@ -66,6 +71,18 @@ import BaseLayout from '@layouts/BaseLayout.astro'
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1.5rem;
+    padding: 0;
+
+    li {
+      list-style-type: none;
+    }
+  }
+
+  #social-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     gap: 1.5rem;
     padding: 0;
 
